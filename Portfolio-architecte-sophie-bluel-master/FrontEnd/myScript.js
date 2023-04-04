@@ -1,21 +1,25 @@
-const apiUrl = "http://localhost:5678/api-docs/";
+document.addEventListener("DOMContentLoaded", () => {
+    const apiUrl = "http://localhost:5678/api/";
 
-fetch(`${apiUrl}/works`)
-    .then(response => response.json())
-    .then((response) => {
-        const works = response.docs;
-        const worksContainer = document.getElementById("portfolio");
+    fetch(`${apiUrl}/works`)
+        .then(response => response.json())
+        .then((response) => {
+            const works = response.docs;
+            const worksContainer = document.getElementsByClassName("gallery");
 
-        if (works && worksContainer) {
-            let html = "";
+            if (works && worksContainer) {
+                let html = "";
 
-            for (const work of works) {
-                html += `
-                    <p>${work.title}</p>
-                    <small>${work.id}</small>
-                `;
+                for (const work of works) {
+                    html += `
+                    <figure>
+                        <img src="${work.imageUrl}" alt="Abajour Tahina">
+                        <figcaption>${work.title}</figcaption>
+                    </figure>
+                    `;
+                }
+
+                worksContainer.innerHTML = html;
             }
-
-            worksContainer.innerHTML = html;
-        }
-    });
+        });
+});
