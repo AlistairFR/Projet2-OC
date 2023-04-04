@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then((response) => {
             const works = response;
-            const worksContainer = document.getElementsByClassName("gallery");
+            const worksContainer = document.getElementById("gallery");
 
             if (works && worksContainer) {
                 let html = "";
