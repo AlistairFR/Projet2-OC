@@ -3,9 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetch(`${apiUrl}/works`)
         .then(response => response.json())
-        .then(body => console.log(body))
         .then((response) => {
-            const works = response.docs;
+            const works = response;
             const worksContainer = document.getElementsByClassName("gallery");
 
             if (works && worksContainer) {
