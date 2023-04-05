@@ -33,14 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fetch des catégories à l'aide de l'API
     const getCategories = () => {
+        const categoriesContainer = document.createElement("div");
+        categoriesContainer.id = "categories";
+
+        portfolio.appendChild(categoriesContainer);
+
         const categories = document.getElementById("categories");
-
-        if (!categories) {
-            const categoriesContainer = document.createElement("div");
-            categoriesContainer.id = "categories";
-
-            portfolio.appendChild(categoriesContainer);
-        }
 
         fetch(`${apiUrl}/categories`)
             .then(response => response.json())
