@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = "http://localhost:5678/api";
     const gallery = document.getElementById("gallery");
-    const portfolio = document.getElementById("portfolio");
     const projectTitle = document.getElementById("projectTitle");
 
     // Fetch des works à l'aide de l'API
@@ -51,11 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         const button = document.createElement("button");
                         button.textContent = category.name;
                         button.setAttribute("data-id", category.id);
+                        button.setAttribute("class", "filters");
                         categories.appendChild(button);
                     }
                 }
             });
     }
 
+    // Appel du chargements des Projets et des Filtres
     getWorks();
+
+    // Modifications CSS des filtres
+    //document.getElementById("categories").style.display = "flex";
+    //document.getElementById("categories").style.alignItems = "center";
+    //document.getElementsByClassName("filters").style.font = "normal 700 16px Syne";
 });
