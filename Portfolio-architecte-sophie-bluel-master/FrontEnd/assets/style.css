@@ -95,6 +95,14 @@ nav li {
 	font-size: 1.2em;
 }
 
+nav li a {
+	text-decoration: none;
+}
+
+nav li a:visited {
+	color: #B1663C
+}
+
 li:hover {
 	color: #B1663C;
 }
