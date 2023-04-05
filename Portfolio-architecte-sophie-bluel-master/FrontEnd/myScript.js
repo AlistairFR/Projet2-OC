@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = "http://localhost:5678/api";
     const gallery = document.getElementById("gallery");
     const portfolio = document.getElementById("portfolio");
+    const projectTitle = document.getElementById("projectTitle");
 
     // Fetch des works à l'aide de l'API
     const getWorks = () => {
@@ -36,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const categoriesContainer = document.createElement("div");
         categoriesContainer.id = "categories";
 
-        portfolio.appendChild(categoriesContainer);
+        projectTitle.after(categoriesContainer);
 
         const categories = document.getElementById("categories");
 
