@@ -66,17 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             });
+
+        // Modifications CSS des filtres
+        document.getElementById("categories").setAttribute("class", "filterBar");
     }
 
     // Appel du chargements des Projets et des Filtres
     getWorks();
-
-    // Modifications CSS des filtres
 });
 
 // Fonction des filtres
 function filterWorks(e) {
-    const works = document.querySelectorAll("figure");
+    const works = document.querySelectorAll("#gallery figure");
     let filter = e.target.dataset.id;
     if (filter === "0") {
         works.forEach(work => work.classList.remove("hidden"));
@@ -89,3 +90,4 @@ function filterWorks(e) {
             });
         };
     };
+

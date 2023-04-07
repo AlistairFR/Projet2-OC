@@ -131,7 +131,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 #gallery {
 	width: 100%;
@@ -177,6 +176,24 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+/* Ajout de CSS pour le projet 3 */
 #loginForm {
 	width: 50%;
 	margin: auto;
@@ -205,24 +222,31 @@ li:hover {
 	margin: 2em 0 1em 0;
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-}
-
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
-}
-
 .hidden {
 	display: none;
 }
 
+.filterBar {
+	display: flex;
+	justify-content: center;
+}
+
+.filters {
+	font-size: 16px;
+	font-family: "Syne";
+	margin: 60px 5px;
+	padding: 10px;
+	color: #1D6154;
+	background-color: white;
+	border: #1D6154 1px solid;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-ms-border-radius: 25px;
+	-o-border-radius: 25px;
+}
+
+.filters:focus {
+	color: white;
+	background-color: #1D6154;
+}
