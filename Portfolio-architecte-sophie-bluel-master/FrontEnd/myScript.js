@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const responseCategories = response;
 
                 if (responseCategories && categories) {
-                            // Création des bouttons à partir des catégories de l'API
+                    // Création des bouttons à partir des catégories de l'API
                     for (const category of responseCategories) {
                         const button = document.createElement("button");
                         button.textContent = category.name;
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     getWorks();
 });
 
-// Fonction des filtres
+// Tri des travaux à l'aide des filtres
 function filterWorks(e) {
     const works = document.querySelectorAll("#gallery figure");
     let filter = e.target.dataset.id;
