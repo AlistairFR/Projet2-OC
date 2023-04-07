@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     for (const work of works) {
                         const figure = document.createElement("figure");
+                        figure.setAttribute("class", work.categoryId);
 
                         const image = document.createElement("img");
                         image.src = work.imageUrl;
@@ -40,17 +41,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const categories = document.getElementById("categories");
 
+        // Création du bouton "Tous"
+        const button = document.createElement("button");
+            button.textContent = "Tous";
+            button.setAttribute("data-id", "0");
+            button.setAttribute("class", "filters");
+            button.setAttribute("onclick", `filterWorks(event)`);
+            categories.appendChild(button);
+
         fetch(`${apiUrl}/categories`)
             .then(response => response.json())
             .then((response) => {
                 const responseCategories = response;
 
                 if (responseCategories && categories) {
+                            // Création des bouttons à partir des catégories de l'API
                     for (const category of responseCategories) {
                         const button = document.createElement("button");
                         button.textContent = category.name;
                         button.setAttribute("data-id", category.id);
                         button.setAttribute("class", "filters");
+                        button.setAttribute("onclick", `filterWorks(event)`);
                         categories.appendChild(button);
                     }
                 }
@@ -65,3 +76,19 @@ document.addEventListener("DOMContentLoaded", () => {
     //document.getElementById("categories").style.alignItems = "center";
     //document.getElementsByClassName("filters").style.font = "normal 700 16px Syne";
 });
+
+// Fonction des filtres
+function filterWorks(e) {
+    const works = document.querySelectorAll("figure");
+    let filter = e.target.dataset.id;
+    if (filter === "0") {
+        works.forEach(work => work.classList.remove("hidden"));
+    }
+        else {
+            works.forEach(work => {
+                work.classList.contains(filter)
+                ? work.classList.remove('hidden')
+                : work.classList.add('hidden');
+            });
+        };
+    };
