@@ -72,9 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     getWorks();
 
     // Modifications CSS des filtres
-    //document.getElementById("categories").style.display = "flex";
-    //document.getElementById("categories").style.alignItems = "center";
-    //document.getElementsByClassName("filters").style.font = "normal 700 16px Syne";
 });
 
 // Fonction des filtres
