@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
         <meta name="description" content="">
         <link rel="stylesheet" href="./assets/style.css">
-        <script src="index.js" defer></script>
+        <script src="myScript.js" defer></script>
     </head>
     <body>
         <header>
@@ -31,8 +31,8 @@
                     <label for="email">Email</label>
 			        <input type="email" name="email" id="email">
 			        <label for="password">Mot de passe</label>
-			        <input name="password" id="password">
-			        <input type="submit" value="Se connecter">
+			        <input type="password" name="password" id="password" autocomplete="on" required>
+			        <input type="submit" id="submit" value="Se connecter">
                 </form>
                 <a href="#">Mot de passe oublié</a>
             </section>

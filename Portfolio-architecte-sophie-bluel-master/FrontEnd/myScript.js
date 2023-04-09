@@ -1,5 +1,6 @@
+const apiUrl = "http://localhost:5678/api";
+
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = "http://localhost:5678/api";
     const gallery = document.getElementById("gallery");
     const projectTitle = document.getElementById("projectTitle");
 
@@ -91,3 +92,30 @@ function filterWorks(e) {
         };
     };
 
+//Système de login
+const form = {
+    email: document.getElementById("email"),
+    password: document.getElementById("password"),
+    submitButton: document.getElementById("submit")
+};
+
+// Quand on clique sur le bouton "Se connecter"
+let submit = form.submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    fetch(`${apiUrl}/users/login`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email: form.email.value,
+            password: form.password.value,
+          }),
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            console.log(response);
+        });
+});
