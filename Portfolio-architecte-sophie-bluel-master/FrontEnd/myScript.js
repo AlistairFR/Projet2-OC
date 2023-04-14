@@ -170,8 +170,49 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
 
     // Mode édition de la page index
         //Bandereau mode édition
+        const editionDiv = document.createElement("div");
+        const editionDivButton = document.createElement("button");
+        const editionText = document.createElement("p");
+        const editionDivIcon = document.createElement("i");
+
+        editionDivButton.setAttribute("onclick", "publishChanges()")
+        editionDivButton.textContent = "publier les changements"
+        editionText.textContent = "Mode édition";
+        editionDivIcon.setAttribute("class", "fa-regular fa-pen-to-square");
+        editionDivIcon.setAttribute("style", "color: #ffffff;");
+
+        editionDiv.appendChild(editionDivIcon);
+        editionDiv.appendChild(editionText);
+        editionDiv.appendChild(editionDivButton);
+        const body = document.querySelector("body")
+        body.insertBefore(editionDiv, document.querySelector("header"));
+
+        //Style du bandereau
+        editionDiv.style.display = "flex"
+        editionDiv.style.justifyContent = "center";
+        editionDiv.style.alignItems = "center";
+        editionDiv.style.padding = "10px 0px";
+        editionDiv.style.background = "black";
+
+        editionDivIcon.style.height = "15px";
+        editionDivIcon.style.width = "15px";
+
+        editionText.style.color = "white";
+        editionText.style.padding = "0px 30px 0px 8px";
+
+        editionDivButton.style.padding = "8px 15px"
+        editionDivButton.style.fontFamily = "Work Sans";
+        editionDivButton.style.fontWeight = "600"
+        editionDivButton.style.borderRadius = "25px"
+        editionDivButton.style.border = "none"
 
         //icônes "modifier"
+        const editionButton = document.createElement("button");
+        const editionIcon = document.createElement("i");
+
+        editionButton.setAttribute("onclick", "openModal()");
+        editionIcon.setAttribute("class", "fa-regular fa-pen-to-square");
+        editionIcon.setAttribute("style", "color: black;");
 
     // Création de la modale
 
