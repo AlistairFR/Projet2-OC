@@ -307,12 +307,21 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
 
         modaleTitle.style.textAlign = "center";
         modaleTitle.style.fontSize = "26px";
+        modaleTitle.style.padding = "25px 0px 45px 0px"
+
+        modaleGallery.style.display = "flex";
+        modaleGallery.style.justifyContent = "space-between";
+        modaleGallery.style.flexWrap = "wrap";
+        modaleGallery.style.width = "70%";
+        modaleGallery.style.padding = "0px 0px 45px 0px";
+        modaleGallery.style.borderBottom = "1px solid #B3B3B3";
 
         modaleAdd.style.fontFamily = "Syne";
         modaleAdd.style.fontWeight = "700";
         modaleAdd.style.color = "white";
         modaleAdd.style.backgroundColor = "#1D6154";
         modaleAdd.style.padding = "10px 50px";
+        modaleAdd.style.margin = "40px 0px 25px 0px"
         modaleAdd.style.width = "40%"
         modaleAdd.style.cursor = "pointer";
         modaleAdd.style.borderRadius = "25px";
@@ -337,7 +346,46 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         body.appendChild(overlay);
         body.appendChild(modale);
 
+        // getWorks() pour la modale
+        fetch(`${apiUrl}/works`)
+            .then(response => response.json())
+            .then((response) => {
+                const works = response;
 
+                if (works && modaleGallery) {
+                    for (const work of works) {
+                        const figure = document.createElement("figure");
+                        figure.style.position = "relative";
+
+                        const image = document.createElement("img");
+                        image.setAttribute("class", "modaleImage");
+                        image.src = work.imageUrl;
+                        image.alt = work.title;
+                        image.style.height = "105px";
+                        image.style.margin = "10px 0px 0px 0px";
+
+                        const deleteIcon = document.createElement("i");
+                        deleteIcon.setAttribute("class", "fa-solid fa-trash-can");
+                        deleteIcon.setAttribute("style", "color: #ffffff;");
+                        deleteIcon.style.padding = "4px";
+                        deleteIcon.style.backgroundColor = "black";
+                        deleteIcon.style.borderRadius = "2px";
+                        deleteIcon.style.position = "absolute";
+                        deleteIcon.style.translate = "-125% 70%";
+
+                        const figCaption = document.createElement("figcaption");
+                        figCaption.textContent = "éditer";
+
+                        figure.appendChild(image);
+                        figure.appendChild(deleteIcon);
+                        figure.appendChild(figCaption);
+                        modaleGallery.appendChild(figure);
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+            });
 
     // Ouvrir la modale quand clic sur icône
 };
