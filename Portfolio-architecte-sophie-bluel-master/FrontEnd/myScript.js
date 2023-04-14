@@ -107,16 +107,6 @@ function filterWorks(e) {
         submitButton: document.getElementById("submit")
     };
 
-    // Message d'erreur pour login incorrect
-    const errorDiv = document.createElement("div");
-    errorDiv.textContent = "Adresse mail ou mot de passe incorrect";
-    document.getElementById("loginForm").appendChild(errorDiv);
-    errorDiv.style.background = "pink";
-    errorDiv.style.color = "red";
-    errorDiv.style.padding = "15px 0px";
-    errorDiv.style.margin= "25px";
-    errorDiv.classList.add("hidden");
-
     // Fonctions pour gérer le token dans le local Storage
     const saveElement = (key, value) => {
         localStorage.setItem(key, value)
@@ -132,6 +122,17 @@ function filterWorks(e) {
 
     // Quand on clique sur le bouton "Se connecter"
     if (form.submitButton){
+
+        // Message d'erreur pour login incorrect
+        const errorDiv = document.createElement("div");
+        errorDiv.textContent = "Adresse mail ou mot de passe incorrect";
+        document.getElementById("loginForm").appendChild(errorDiv);
+        errorDiv.style.background = "pink";
+        errorDiv.style.color = "red";
+        errorDiv.style.padding = "15px 0px";
+        errorDiv.style.margin= "25px";
+        errorDiv.classList.add("hidden");
+
         let submit = form.submitButton.addEventListener("click", (e) => {
             e.preventDefault();
 
@@ -164,7 +165,9 @@ function filterWorks(e) {
     }
 
 // Page index quand authentifié
-
+if (typeof getElement("authToken") === "string"){
+    console.log("ok");
+}
     // Mode édition de la page index
         //Bandereau mode édiiton
         //icônes "modifier"
