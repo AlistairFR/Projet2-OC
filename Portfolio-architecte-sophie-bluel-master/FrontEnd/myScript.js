@@ -96,7 +96,7 @@ function filterWorks(e) {
                 : work.classList.add('hidden');
             });
         };
-    };
+};
 
 // Système de login
 
@@ -106,6 +106,16 @@ const form = {
     password: document.getElementById("password"),
     submitButton: document.getElementById("submit")
 };
+
+// Message d'erreur pour login incorrect
+const errorDiv = document.createElement("div");
+errorDiv.textContent = "Adresse mail ou mot de passe incorrect";
+document.getElementById("loginForm").appendChild(errorDiv);
+errorDiv.style.background = "pink";
+errorDiv.style.color = "red";
+errorDiv.style.padding = "15px 0px";
+errorDiv.style.margin= "25px";
+errorDiv.classList.add("hidden");
 
 // Fonctions pour gérer le token dans le local Storage
 const saveElement = (key, value) => {
@@ -140,10 +150,12 @@ if (form.submitButton){
             .then((response) => response.json())
             .then((response) => {
                 saveElement("authToken", response.token)
-                console.log(getElement("authToken"));
                 if (getElement("authToken") !== "undefined"){
                     window.location.href = "index.html"
                 }
+                    else {
+                        errorDiv.removeAttribute("class");
+                    }
             })
             .catch( (error) => {
                 console.error(error)
