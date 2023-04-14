@@ -164,14 +164,16 @@ function filterWorks(e) {
         });
     }
 
-// Page index quand authentifié
-if (typeof getElement("authToken") === "string"){
+// Quand AUTHENTIFIED et sur la page d'accueil
+if (typeof getElement("authToken") === "string" && document.querySelector("title").innerHTML === "Sophie Bluel - Architecte d'intérieur") {
     console.log("ok");
-}
+
     // Mode édition de la page index
-        //Bandereau mode édiiton
+        //Bandereau mode édition
+
         //icônes "modifier"
 
     // Création de la modale
 
-    // Ouvrir la modale quand authentifié ET clic sur icône
+    // Ouvrir la modale quand clic sur icône
+}
