@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         gallery.appendChild(figure);
                     }
                 }
+            })
+            .catch((error) => {
+                console.error(error)
             });
     }
 
@@ -66,6 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         categories.appendChild(button);
                     }
                 }
+            })
+            .catch((error) => {
+                console.error(error)
             });
 
         // Modifications CSS des filtres
@@ -92,30 +98,49 @@ function filterWorks(e) {
         };
     };
 
-//Système de login
+// Système de login
 const form = {
     email: document.getElementById("email"),
     password: document.getElementById("password"),
     submitButton: document.getElementById("submit")
 };
 
-// Quand on clique sur le bouton "Se connecter"
-let submit = form.submitButton.addEventListener("click", (e) => {
-    e.preventDefault();
+// Fonctions pour gérer le token dans le local Storage
+const saveElement = (key, value) => {
+    localStorage.setItem(key, value)
+  };
 
-    fetch(`${apiUrl}/users/login`, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            email: form.email.value,
-            password: form.password.value,
-          }),
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            console.log(response);
-        });
-});
+  const getElement = (key) => {
+    return localStorage.getItem(key)
+  };
+
+  const removeElement = (key) => {
+    localStorage.removeItem(key)
+  };
+
+// Quand on clique sur le bouton "Se connecter"
+if (form.submitButton){
+    let submit = form.submitButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        fetch(`${apiUrl}/users/login`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                // A mettre dans les posts avec auth : "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({
+                email: form.email.value,
+                password: form.password.value,
+            }),
+            })
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+            })
+            .catch( (error) => {
+                console.error(error)
+            })
+    });
+}
