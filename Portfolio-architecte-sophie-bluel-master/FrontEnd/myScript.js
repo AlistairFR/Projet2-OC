@@ -99,6 +99,8 @@ function filterWorks(e) {
     };
 
 // Système de login
+
+// Formulaire de login
 const form = {
     email: document.getElementById("email"),
     password: document.getElementById("password"),
@@ -108,15 +110,15 @@ const form = {
 // Fonctions pour gérer le token dans le local Storage
 const saveElement = (key, value) => {
     localStorage.setItem(key, value)
-  };
+};
 
-  const getElement = (key) => {
+const getElement = (key) => {
     return localStorage.getItem(key)
-  };
+};
 
-  const removeElement = (key) => {
+const removeElement = (key) => {
     localStorage.removeItem(key)
-  };
+};
 
 // Quand on clique sur le bouton "Se connecter"
 if (form.submitButton){
@@ -137,7 +139,11 @@ if (form.submitButton){
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                saveElement("authToken", response.token)
+                console.log(getElement("authToken"));
+                if (getElement("authToken") !== "undefined"){
+                    window.location.href = "index.html"
+                }
             })
             .catch( (error) => {
                 console.error(error)
