@@ -166,13 +166,13 @@ function filterWorks(e) {
 
 // Quand AUTHENTIFIED et sur la page d'accueil
 if (typeof getElement("authToken") === "string" && document.querySelector("title").innerHTML === "Sophie Bluel - Architecte d'intérieur") {
-    console.log("ok");
 
     // Mode édition de la page index
         // Bandereau mode édition
         const editionDiv = document.createElement("div");
         const editionDivButton = document.createElement("button");
         const editionText = document.createElement("p");
+        const editionIconBar = document.createElement("div");
         const editionDivIcon = document.createElement("i");
 
         editionDivButton.setAttribute("onclick", "publishChanges()")
@@ -200,7 +200,7 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         editionText.style.color = "white";
         editionText.style.padding = "0px 30px 0px 8px";
 
-        editionDivButton.style.padding = "8px 15px";    
+        editionDivButton.style.padding = "8px 15px";
         editionDivButton.style.fontFamily = "Work Sans";
         editionDivButton.style.fontWeight = "600";
         editionDivButton.style.borderRadius = "25px";
@@ -212,8 +212,8 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         const editionButton = document.createElement("a");
         const editionIcon = document.createElement("i");
 
-        editionButton.setAttribute("onclick", "openModal()");
-        editionIcon.setAttribute("onclick", "openModal()");
+        editionButton.setAttribute("onclick", "openModale()");
+        editionIcon.setAttribute("onclick", "openModale()");
         editionIcon.setAttribute("class", "fa-regular fa-pen-to-square");
         editionIcon.setAttribute("style", "color: black;");
 
@@ -247,8 +247,97 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
 
         editionDivSmall.style.translate = "8%";
 
-
     // Création de la modale
+        const overlay = document.createElement("div");
+            //overlay.setAttribute("class", "hidden");
+        const modale = document.createElement("div");
+            //modale.setAttribute("class", "hidden");
+        const modaleIcons = document.createElement("div");
+        // Bouton BACK
+        const modaleBack = document.createElement("i");
+        modaleBack.setAttribute("class", "fa-solid fa-arrow-left");
+            //modaleBack.setAttribute("onclick", "closeModale()");
+        // Bouton EXIT
+        const modaleExit = document.createElement("i");
+        modaleExit.setAttribute("class", "fa-solid fa-xmark");
+        modaleExit.setAttribute("onclick", "closeModale()");
+        // Titre
+        const modaleTitle = document.createElement("h3");
+        modaleTitle.textContent = "Galerie photo";
+        // Gallerie
+        const modaleGallery = document.createElement("div");
+        // Bouton "Ajouter des photos"
+        const modaleAdd = document.createElement("button");
+        modaleAdd.setAttribute("onclick", "openForm()");
+        modaleAdd.textContent = "Ajouter une photo";
+        // Bouton "Supprimer la gallerie"
+        const modaleDelete = document.createElement("button");
+        modaleDelete.setAttribute("onclick", "deleteWorks()");
+        modaleDelete.textContent = "Supprimer la gallerie"
+
+        // Style de la modale
+        overlay.style.position = "fixed";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100vw";
+        overlay.style.height = "100vh";
+        overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+
+        modale.style.display = "flex";
+        modale.style.flexDirection = "column";
+        modale.style.alignItems = "center";
+        modale.style.position = "fixed";
+        modale.style.top = "50%";
+        modale.style.left = "50%";
+        modale.style.translate = "-50% -50%";
+        modale.style.width = "630px";
+        modale.style.height = "730px";
+        modale.style.backgroundColor = "white";
+        modale.style.borderRadius = "15px";
+        modale.style.padding = "20px";
+
+        modaleIcons.style.display = "flex";
+        modaleIcons.style.justifyContent = "space-between";
+        modaleIcons.style.width = "100%";
+
+        modaleBack.style.visibility = "hidden";
+        modaleBack.style.cursor = "pointer";
+
+        modaleExit.style.cursor = "pointer";
+
+        modaleTitle.style.textAlign = "center";
+        modaleTitle.style.fontSize = "26px";
+
+        modaleAdd.style.fontFamily = "Syne";
+        modaleAdd.style.fontWeight = "700";
+        modaleAdd.style.color = "white";
+        modaleAdd.style.backgroundColor = "#1D6154";
+        modaleAdd.style.padding = "10px 50px";
+        modaleAdd.style.width = "40%"
+        modaleAdd.style.cursor = "pointer";
+        modaleAdd.style.borderRadius = "25px";
+        modaleAdd.style.border = "none";
+
+        modaleDelete.style.color = "Red";
+        modaleDelete.style.fontFamily = "Syne";
+        modaleDelete.style.fontWeight = "400";
+        modaleDelete.style.border = "none";
+        modaleDelete.style.backgroundColor = "white";
+        modaleDelete.style.cursor = "pointer";
+
+        // Ajout de la modale dans la page
+        modaleIcons.appendChild(modaleBack);
+        modaleIcons.appendChild(modaleExit);
+        modale.appendChild(modaleIcons);
+        modale.appendChild(modaleTitle);
+        modale.appendChild(modaleGallery);
+        modale.appendChild(modaleAdd);
+        modale.appendChild(modaleDelete);
+
+        body.appendChild(overlay);
+        body.appendChild(modale);
+
+
 
     // Ouvrir la modale quand clic sur icône
-}
+};
