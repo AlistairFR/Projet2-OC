@@ -236,6 +236,7 @@ footer nav ul {
 	font-family: "Syne";
 	margin: 60px 5px;
 	padding: 10px;
+	cursor: pointer;
 	color: #1D6154;
 	background-color: white;
 	border: #1D6154 1px solid;

@@ -169,7 +169,7 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
     console.log("ok");
 
     // Mode édition de la page index
-        //Bandereau mode édition
+        // Bandereau mode édition
         const editionDiv = document.createElement("div");
         const editionDivButton = document.createElement("button");
         const editionText = document.createElement("p");
@@ -187,7 +187,7 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         const body = document.querySelector("body")
         body.insertBefore(editionDiv, document.querySelector("header"));
 
-        //Style du bandereau
+        // Style du bandereau
         editionDiv.style.display = "flex"
         editionDiv.style.justifyContent = "center";
         editionDiv.style.alignItems = "center";
@@ -200,19 +200,53 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         editionText.style.color = "white";
         editionText.style.padding = "0px 30px 0px 8px";
 
-        editionDivButton.style.padding = "8px 15px"
+        editionDivButton.style.padding = "8px 15px";    
         editionDivButton.style.fontFamily = "Work Sans";
-        editionDivButton.style.fontWeight = "600"
-        editionDivButton.style.borderRadius = "25px"
-        editionDivButton.style.border = "none"
+        editionDivButton.style.fontWeight = "600";
+        editionDivButton.style.borderRadius = "25px";
+        editionDivButton.style.border = "none";
+        editionDivButton.style.cursor = "pointer";
 
-        //icônes "modifier"
-        const editionButton = document.createElement("button");
+        // Icônes "modifier"
+        const editionDivSmall = document.createElement("div");
+        const editionButton = document.createElement("a");
         const editionIcon = document.createElement("i");
 
         editionButton.setAttribute("onclick", "openModal()");
+        editionIcon.setAttribute("onclick", "openModal()");
         editionIcon.setAttribute("class", "fa-regular fa-pen-to-square");
         editionIcon.setAttribute("style", "color: black;");
+
+        editionButton.textContent = "modifier";
+        editionDivSmall.appendChild(editionIcon);
+        editionDivSmall.appendChild(editionButton);
+
+        // Style des boutons "modifier"
+        editionDivSmall.style.color = "black";
+        editionDivSmall.style.fontFamily = "Work Sans";
+        editionDivSmall.style.fontStyle = "normal";
+        editionDivSmall.style.fontSize = "14px";
+        editionDivSmall.style.fontWeight = "normal";
+        editionDivSmall.style.padding = "15px";
+
+        editionIcon.style.padding = "0px 8px 0px 0px";
+        editionIcon.style.cursor = "pointer";
+
+        editionButton.style.cursor = "pointer";
+
+        const title = document.getElementById("projectTitle");
+        const photo = document.querySelector("figure");
+        const editionDivSmall2 = editionDivSmall.cloneNode(true);
+        photo.appendChild(editionDivSmall);
+        title.appendChild(editionDivSmall2);
+
+        title.style.display = "flex";
+        title.style.justifyContent = "center";
+        title.style.alignItems = "center";
+        title.style.translate = "5%";
+
+        editionDivSmall.style.translate = "8%";
+
 
     // Création de la modale
 
