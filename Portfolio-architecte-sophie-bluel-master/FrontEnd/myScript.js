@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     for (const work of works) {
                         const figure = document.createElement("figure");
                         figure.setAttribute("class", work.categoryId);
+                        figure.setAttribute("id", work.id);
 
                         const image = document.createElement("img");
                         image.src = work.imageUrl;
@@ -141,12 +142,11 @@ function filterWorks(e) {
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
-                    // A mettre dans les posts avec auth : "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify({
                     email: form.email.value,
                     password: form.password.value,
-                }),
+                })
                 })
                 .then((response) => response.json())
                 .then((response) => {
@@ -165,7 +165,7 @@ function filterWorks(e) {
     }
 
 // Quand AUTHENTIFIED et sur la page d'accueil
-if (typeof getElement("authToken") === "string" && document.querySelector("title").innerHTML === "Sophie Bluel - Architecte d'intérieur") {
+if (getElement("authToken") !== "undefined" && typeof getElement("authToken") === "string" && document.querySelector("title").innerHTML === "Sophie Bluel - Architecte d'intérieur") {
 
     // Mode édition de la page index
         // Bandereau mode édition
@@ -291,7 +291,6 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         modale.style.left = "50%";
         modale.style.translate = "-50% -50%";
         modale.style.width = "630px";
-        modale.style.height = "730px";
         modale.style.backgroundColor = "white";
         modale.style.borderRadius = "15px";
         modale.style.padding = "20px";
@@ -310,10 +309,9 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         modaleTitle.style.padding = "25px 0px 45px 0px"
 
         modaleGallery.style.display = "flex";
-        modaleGallery.style.justifyContent = "space-between";
         modaleGallery.style.flexWrap = "wrap";
         modaleGallery.style.width = "70%";
-        modaleGallery.style.padding = "0px 0px 45px 0px";
+        modaleGallery.style.paddingBottom = "45px";
         modaleGallery.style.borderBottom = "1px solid #B3B3B3";
 
         modaleAdd.style.fontFamily = "Syne";
@@ -333,6 +331,7 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         modaleDelete.style.border = "none";
         modaleDelete.style.backgroundColor = "white";
         modaleDelete.style.cursor = "pointer";
+        modaleDelete.style.marginBottom = "25px";
 
         // Ajout de la modale dans la page
         modaleIcons.appendChild(modaleBack);
@@ -356,18 +355,19 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
                     for (const work of works) {
                         const figure = document.createElement("figure");
                         figure.style.position = "relative";
-                        figure.setAttribute("id", work.categoryId);
+                        figure.style.marginRight = "9px"
 
                         const image = document.createElement("img");
                         image.setAttribute("class", "modaleImage");
                         image.src = work.imageUrl;
                         image.alt = work.title;
                         image.style.height = "105px";
-                        image.style.margin = "10px 0px 0px 0px";
+                        image.style.marginTop = "10px";
 
                         const deleteIcon = document.createElement("i");
                         deleteIcon.setAttribute("class", "fa-solid fa-trash-can");
                         deleteIcon.setAttribute("style", "color: #ffffff;");
+                        deleteIcon.setAttribute("onclick", `deleteWork(${work.id})`);
                         deleteIcon.style.padding = "4px";
                         deleteIcon.style.backgroundColor = "black";
                         deleteIcon.style.borderRadius = "2px";
@@ -395,8 +395,26 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         modale.style.display = "flex";
     };
 
+    // Fermer la modale quand clic icone ou overlay
     function closeModale() {
         overlay.style.display = "none";
         modale.style.display = "none";
+    };
+
+    // Suppression d'un Work à l'appui d'une icone
+    function deleteWork(id) {
+        fetch(`${apiUrl}/works/${id}`, {
+            method: "DELETE",
+            headers: {
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                }
+            })
+            .then((response) => {
+                console.log(id);
+                console.log(`${apiUrl}/works/${id}`);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     };
 };
