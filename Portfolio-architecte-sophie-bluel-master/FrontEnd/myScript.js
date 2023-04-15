@@ -356,6 +356,7 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
                     for (const work of works) {
                         const figure = document.createElement("figure");
                         figure.style.position = "relative";
+                        figure.setAttribute("id", work.categoryId);
 
                         const image = document.createElement("img");
                         image.setAttribute("class", "modaleImage");
