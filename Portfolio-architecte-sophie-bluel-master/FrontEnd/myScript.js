@@ -257,7 +257,6 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         // Bouton BACK
         const modaleBack = document.createElement("i");
         modaleBack.setAttribute("class", "fa-solid fa-arrow-left");
-            //modaleBack.setAttribute("onclick", "closeModale()");
         // Bouton EXIT
         const modaleExit = document.createElement("i");
         modaleExit.setAttribute("class", "fa-solid fa-xmark");
@@ -416,4 +415,28 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
                 console.error(error)
             })
     };
+
+    // Création du formulaire de la modale
+    const modaleForm = document.createElement("form");
+    modaleForm.setAttribute("action", `${apiUrl}/works`);
+    modaleForm.setAttribute("method", "post");
+    modaleForm.setAttribute("enctype", "multipart/form-data");
+
+    const modaleFormImageIcon = document.createElement("i");
+    modaleFormImageIcon.setAttribute("class", "fa-regular fa-image");
+    modaleFormImageIcon.setAttribute("style", "color: #b9c5cc;");
+
+    const modaleFormImage = document.createElement("input");
+    modaleFormImage.setAttribute("type", "file");
+    modaleFormImage.setAttribute("name", "photo");
+    modaleFormImage.setAttribute("id", "photo");
+    modaleFormImage.setAttribute("accept", "image/png, image/jpeg");
+
+    const modaleFormTitleLabel = document.createElement("label");
+    modaleFormTitleLabel.setAttribute("for", "titre");
+
+    const modaleFormTitle = document.createElement("input");
+    modaleFormTitle.setAttribute("type", "text");
+    modaleFormTitle.setAttribute("name", "titre");
+    modaleFormTitle.setAttribute("id", "titre");
 };
