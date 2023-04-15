@@ -273,7 +273,6 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         modaleAdd.textContent = "Ajouter une photo";
         // Bouton "Supprimer la gallerie"
         const modaleDelete = document.createElement("button");
-        modaleDelete.setAttribute("onclick", "deleteWorks()");
         modaleDelete.textContent = "Supprimer la gallerie"
 
         // Style de la modale
