@@ -249,9 +249,10 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
 
     // Création de la modale
         const overlay = document.createElement("div");
-            //overlay.setAttribute("class", "hidden");
+        overlay.setAttribute("class", "hidden");
+        overlay.setAttribute("onclick", "closeModale()");
         const modale = document.createElement("div");
-            //modale.setAttribute("class", "hidden");
+        modale.setAttribute("class", "hidden");
         const modaleIcons = document.createElement("div");
         // Bouton BACK
         const modaleBack = document.createElement("i");
@@ -283,7 +284,6 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
         overlay.style.height = "100vh";
         overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
 
-        modale.style.display = "flex";
         modale.style.flexDirection = "column";
         modale.style.alignItems = "center";
         modale.style.position = "fixed";
@@ -372,6 +372,7 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
                         deleteIcon.style.borderRadius = "2px";
                         deleteIcon.style.position = "absolute";
                         deleteIcon.style.translate = "-125% 70%";
+                        deleteIcon.style.cursor = "pointer";
 
                         const figCaption = document.createElement("figcaption");
                         figCaption.textContent = "éditer";
@@ -388,4 +389,13 @@ if (typeof getElement("authToken") === "string" && document.querySelector("title
             });
 
     // Ouvrir la modale quand clic sur icône
+    function openModale() {
+        overlay.style.display = "block";
+        modale.style.display = "flex";
+    };
+
+    function closeModale() {
+        overlay.style.display = "none";
+        modale.style.display = "none";
+    };
 };
