@@ -257,6 +257,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         // Bouton BACK
         const modaleBack = document.createElement("i");
         modaleBack.setAttribute("class", "fa-solid fa-arrow-left");
+        modaleBack.setAttribute("onclick", "closeForm()")
         // Bouton EXIT
         const modaleExit = document.createElement("i");
         modaleExit.setAttribute("class", "fa-solid fa-xmark");
@@ -421,22 +422,68 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleForm.setAttribute("action", `${apiUrl}/works`);
     modaleForm.setAttribute("method", "post");
     modaleForm.setAttribute("enctype", "multipart/form-data");
-
+    // Div bleue pour le file input
+    const modaleFormBlueDiv = document.createElement("div");
+    // Icone image
     const modaleFormImageIcon = document.createElement("i");
     modaleFormImageIcon.setAttribute("class", "fa-regular fa-image");
     modaleFormImageIcon.setAttribute("style", "color: #b9c5cc;");
-
+    // Input file photo
     const modaleFormImage = document.createElement("input");
     modaleFormImage.setAttribute("type", "file");
     modaleFormImage.setAttribute("name", "photo");
     modaleFormImage.setAttribute("id", "photo");
     modaleFormImage.setAttribute("accept", "image/png, image/jpeg");
-
+    // Label titre
     const modaleFormTitleLabel = document.createElement("label");
     modaleFormTitleLabel.setAttribute("for", "titre");
-
+    modaleFormTitleLabel.textContent = "Titre";
+    // Input titre
     const modaleFormTitle = document.createElement("input");
     modaleFormTitle.setAttribute("type", "text");
     modaleFormTitle.setAttribute("name", "titre");
     modaleFormTitle.setAttribute("id", "titre");
+    // Label categories
+    const modaleFormCategoriesLabel = document.createElement("label");
+    modaleFormCategoriesLabel.setAttribute("for", "categories");
+    modaleFormCategoriesLabel.textContent = "Catégorie";
+    // Select input categories
+    const modaleFormCategories = document.createElement("select");
+    modaleFormCategories.setAttribute("id", "categories");
+    modaleFormCategories.setAttribute("name", "categories");
+    // Option vide comme placeholder
+    const modaleOptionEmpty =  document.createElement("option");
+    modaleOptionEmpty.setAttribute("value", "");
+    modaleOptionEmpty.setAttribute("disabled");
+    modaleOptionEmpty.setAttribute("selected");
+    modaleFormCategories.appendChild(modaleOptionEmpty);
+    // Option categories via fetch categories
+    fetch(`${apiUrl}/categories`)
+        .then(response => response.json())
+        .then((response) => {
+            const categories = response;
+
+            if (categories) {
+                // Création des options à partir des catégories de l'API
+                for (const category of categories) {
+                    const modaleOption =  document.createElement("option");
+                    modaleOption.setAttribute("value", category.id);
+                    modaleOption.textContent = category.name;
+                    modaleFormCategories.appendChild(modaleOption);
+                }
+            }
+        })
+        .catch((error) => {
+            console.error(error)
+        });
+    // Création du bouton Valider
+    const modaleFormValidate = document.createElement("button");
+    modaleFormValidate.setAttribute("type", "submit");
+    modaleFormValidate.setAttribute("id", "validate");
+    modaleFormValidate.setAttribute("value", "Valider");
+
+    // Append du Formulaire
+    // Style du Formulaire
+    // openForm()
+    // closeForm()
 };
