@@ -398,6 +398,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     function closeModale() {
         overlay.style.display = "none";
         modale.style.display = "none";
+        closeForm();
     };
 
     // Suppression d'un Work à l'appui d'une icone
@@ -454,8 +455,8 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     // Option vide comme placeholder
     const modaleOptionEmpty =  document.createElement("option");
     modaleOptionEmpty.setAttribute("value", "");
-    modaleOptionEmpty.setAttribute("disabled");
-    modaleOptionEmpty.setAttribute("selected");
+    modaleOptionEmpty.setAttribute("disabled", "");
+    modaleOptionEmpty.setAttribute("selected", "");
     modaleFormCategories.appendChild(modaleOptionEmpty);
     // Option categories via fetch categories
     fetch(`${apiUrl}/categories`)
@@ -477,13 +478,66 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
             console.error(error)
         });
     // Création du bouton Valider
-    const modaleFormValidate = document.createElement("button");
+    const modaleFormValidate = document.createElement("input");
     modaleFormValidate.setAttribute("type", "submit");
     modaleFormValidate.setAttribute("id", "validate");
     modaleFormValidate.setAttribute("value", "Valider");
 
     // Append du Formulaire
+    modaleFormBlueDiv.appendChild(modaleFormImageIcon);
+    modaleFormBlueDiv.appendChild(modaleFormImage);
+    modaleForm.appendChild(modaleFormBlueDiv);
+    modaleForm.appendChild(modaleFormTitleLabel);
+    modaleForm.appendChild(modaleFormTitle);
+    modaleForm.appendChild(modaleFormCategoriesLabel);
+    modaleForm.appendChild(modaleFormCategories);
+    modaleForm.appendChild(modaleFormValidate);
+    modale.appendChild(modaleForm);
+
     // Style du Formulaire
+    modaleForm.style.display = "none";
+    modaleForm.style.flexDirection = "column";
+
+    modaleFormBlueDiv.style.display = "flex";
+    modaleFormBlueDiv.style.flexDirection = "column";
+    modaleFormBlueDiv.style.alignItems = "center";
+    modaleFormBlueDiv.style.padding = "30px 120px 25px 120px";
+    modaleFormBlueDiv.style.marginBottom = "30px";
+    modaleFormBlueDiv.style.backgroundColor = "#E8F1F7";
+
+    modaleFormImageIcon.style.fontSize = "5em";
+    modaleFormImageIcon.style.paddingBottom = "20px";
+
+    modaleFormTitle.style.height = "40px";
+    modaleFormTitle.style.margin = "10px 0px 20px 0px";
+    modaleFormTitle.style.border = "none"
+    modaleFormTitle.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
+
+    modaleFormCategories.style.height = "45px";
+    modaleFormCategories.style.margin = "10px 0px 50px 0px";
+    modaleFormCategories.style.border = "none"
+    modaleFormCategories.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
+    modaleFormCategories.style.cursor = "pointer"
+
+    modaleFormCategoriesLabel.style.fontWeight = "medium";
+
     // openForm()
+    function openForm() {
+        modaleTitle.textContent = "Ajout photo";
+        modaleBack.style.visibility = "visible";
+        modaleGallery.style.display = "none";
+        modaleAdd.style.display = "none";
+        modaleDelete.style.display = "none";
+        modaleForm.style.display = "flex";
+
+    }
     // closeForm()
+    function closeForm() {
+        modaleTitle.textContent = "Gallerie photo";
+        modaleBack.style.visibility = "hidden";
+        modaleGallery.style.display = "flex";
+        modaleAdd.style.display = "block";
+        modaleDelete.style.display = "block";
+        modaleForm.style.display = "none";
+    }
 };
