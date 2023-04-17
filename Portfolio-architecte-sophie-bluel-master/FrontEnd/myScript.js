@@ -510,16 +510,17 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
 
     modaleFormTitle.style.height = "40px";
     modaleFormTitle.style.margin = "10px 0px 20px 0px";
+    modaleFormTitle.style.paddingLeft = "15px"
     modaleFormTitle.style.border = "none"
     modaleFormTitle.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
 
     modaleFormCategories.style.height = "45px";
     modaleFormCategories.style.margin = "10px 0px 50px 0px";
+    modaleFormCategories.style.paddingLeft = "15px"
     modaleFormCategories.style.border = "none"
     modaleFormCategories.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
     modaleFormCategories.style.cursor = "pointer"
 
-    modaleFormCategoriesLabel.style.fontWeight = "medium";
 
     // openForm()
     function openForm() {
