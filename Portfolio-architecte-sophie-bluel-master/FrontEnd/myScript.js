@@ -292,7 +292,8 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         modale.style.top = "50%";
         modale.style.left = "50%";
         modale.style.translate = "-50% -50%";
-        modale.style.width = "630px";
+        modale.style.maxWidth = "630px";
+        modale.style.width = "80vw";
         modale.style.backgroundColor = "white";
         modale.style.borderRadius = "15px";
         modale.style.padding = "20px";
@@ -455,6 +456,8 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     const modaleFormCategories = document.createElement("select");
     modaleFormCategories.setAttribute("id", "categories");
     modaleFormCategories.setAttribute("name", "categories");
+    // Div vide pour la border
+    const modaleFormBorder = document.createElement("div");
     // Option vide comme placeholder
     const modaleOptionEmpty =  document.createElement("option");
     modaleOptionEmpty.setAttribute("value", "");
@@ -494,6 +497,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleForm.appendChild(modaleFormTitle);
     modaleForm.appendChild(modaleFormCategoriesLabel);
     modaleForm.appendChild(modaleFormCategories);
+    modaleForm.appendChild(modaleFormBorder);
     modaleForm.appendChild(modaleFormValidate);
     modale.appendChild(modaleForm);
 
@@ -513,16 +517,25 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
 
     modaleFormTitle.style.height = "40px";
     modaleFormTitle.style.margin = "10px 0px 20px 0px";
-    modaleFormTitle.style.paddingLeft = "15px"
-    modaleFormTitle.style.border = "none"
+    modaleFormTitle.style.paddingLeft = "15px";
+    modaleFormTitle.style.border = "none";
     modaleFormTitle.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
 
     modaleFormCategories.style.height = "45px";
     modaleFormCategories.style.margin = "10px 0px 50px 0px";
-    modaleFormCategories.style.paddingLeft = "15px"
-    modaleFormCategories.style.border = "none"
+    modaleFormCategories.style.paddingLeft = "15px";
+    modaleFormCategories.style.border = "none";
     modaleFormCategories.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
-    modaleFormCategories.style.cursor = "pointer"
+    modaleFormCategories.style.cursor = "pointer";
+
+    modaleFormValidate.style.fontFamily = "Syne";
+    modaleFormValidate.style.fontWeight = "700";
+    modaleFormValidate.style.color = "white";
+    modaleFormValidate.style.backgroundColor = "#1D6154";
+    modaleFormValidate.style.padding = "10px 50px";
+    modaleFormValidate.style.cursor = "pointer";
+    modaleFormValidate.style.borderRadius = "25px";
+    modaleFormValidate.style.border = "none";
 
 
     // openForm()
