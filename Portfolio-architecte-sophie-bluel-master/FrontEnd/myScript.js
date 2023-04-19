@@ -188,6 +188,9 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         body.insertBefore(editionDiv, document.querySelector("header"));
 
         // Style du bandereau
+        editionDiv.style.width = "100vw";
+        editionDiv.style.marginLeft = "calc(-1 * ((100vw - 100%) / 2))";
+
         editionDiv.style.display = "flex"
         editionDiv.style.justifyContent = "center";
         editionDiv.style.alignItems = "center";
