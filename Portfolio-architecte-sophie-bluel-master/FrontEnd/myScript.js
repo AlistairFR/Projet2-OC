@@ -425,6 +425,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleForm.setAttribute("action", `${apiUrl}/works`);
     modaleForm.setAttribute("method", "post");
     modaleForm.setAttribute("enctype", "multipart/form-data");
+    modaleForm.setAttribute("name", "modaleForm");
     // Div bleue pour le file input
     const modaleFormBlueDiv = document.createElement("div");
     // Icone image
@@ -489,7 +490,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormValidate.setAttribute("type", "submit");
     modaleFormValidate.setAttribute("id", "validate");
     modaleFormValidate.setAttribute("value", "Valider");
-    modaleFormValidate.setAttribute("disabled", "");
+    modaleFormValidate.setAttribute("onclick", "IsFull()");
 
     // Append du Formulaire
     modaleFormBlueDiv.appendChild(modaleFormImageIcon);
@@ -543,7 +544,13 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormValidate.style.border = "none";
 
     // Check if (form rempli) then (boutton validate disabled=false)
-
+    function IsFull() {
+        if (document.forms['modaleForm'].titre.value !== "" && document.forms['modaleForm'].photo.value !== "" && document.forms['modaleForm'].categories.value !== "") {
+            modaleFormValidate.style.backgroundColor = "#1D6154";
+            return true;
+        }
+        return false;
+    };
 
     // openForm()
     function openForm() {
