@@ -488,6 +488,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormValidate.setAttribute("type", "submit");
     modaleFormValidate.setAttribute("id", "validate");
     modaleFormValidate.setAttribute("value", "Valider");
+    modaleFormValidate.setAttribute("disabled", "");
 
     // Append du Formulaire
     modaleFormBlueDiv.appendChild(modaleFormImageIcon);
@@ -528,14 +529,19 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormCategories.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
     modaleFormCategories.style.cursor = "pointer";
 
+    modaleFormBorder.style.borderTop = "1px solid #B3B3B3"
+
     modaleFormValidate.style.fontFamily = "Syne";
     modaleFormValidate.style.fontWeight = "700";
     modaleFormValidate.style.color = "white";
-    modaleFormValidate.style.backgroundColor = "#1D6154";
+    modaleFormValidate.style.backgroundColor = "#A7A7A7";
     modaleFormValidate.style.padding = "10px 50px";
+    modaleFormValidate.style.marginTop ="30px";
     modaleFormValidate.style.cursor = "pointer";
     modaleFormValidate.style.borderRadius = "25px";
     modaleFormValidate.style.border = "none";
+
+    // Check if (form rempli) then (boutton validate disabled=false)
 
 
     // openForm()
