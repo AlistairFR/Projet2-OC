@@ -435,28 +435,28 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     // Input file photo
     const modaleFormImage = document.createElement("input");
     modaleFormImage.setAttribute("type", "file");
-    modaleFormImage.setAttribute("name", "photo");
-    modaleFormImage.setAttribute("id", "photo");
+    modaleFormImage.setAttribute("name", "image");
+    modaleFormImage.setAttribute("id", "image");
     modaleFormImage.setAttribute("accept", "image/png, image/jpeg");
     modaleFormImage.setAttribute("required", "");
     // Label titre
     const modaleFormTitleLabel = document.createElement("label");
-    modaleFormTitleLabel.setAttribute("for", "titre");
+    modaleFormTitleLabel.setAttribute("for", "title");
     modaleFormTitleLabel.textContent = "Titre";
     // Input titre
     const modaleFormTitle = document.createElement("input");
     modaleFormTitle.setAttribute("type", "text");
-    modaleFormTitle.setAttribute("name", "titre");
-    modaleFormTitle.setAttribute("id", "titre");
+    modaleFormTitle.setAttribute("name", "title");
+    modaleFormTitle.setAttribute("id", "title");
     modaleFormTitle.setAttribute("required", "");
     // Label categories
     const modaleFormCategoriesLabel = document.createElement("label");
-    modaleFormCategoriesLabel.setAttribute("for", "categories");
+    modaleFormCategoriesLabel.setAttribute("for", "category");
     modaleFormCategoriesLabel.textContent = "Catégorie";
     // Select input categories
     const modaleFormCategories = document.createElement("select");
-    modaleFormCategories.setAttribute("id", "categories");
-    modaleFormCategories.setAttribute("name", "categories");
+    modaleFormCategories.setAttribute("id", "category");
+    modaleFormCategories.setAttribute("name", "category");
     modaleFormCategories.setAttribute("required", "");
     // Div vide pour la border
     const modaleFormBorder = document.createElement("div");
@@ -545,7 +545,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
 
     // Check if (form rempli) then (boutton validate disabled=false)
     function IsFull() {
-        if (document.forms['modaleForm'].titre.value !== "" && document.forms['modaleForm'].photo.value !== "" && document.forms['modaleForm'].categories.value !== "") {
+        if (document.forms['modaleForm'].title.value !== "" && document.forms['modaleForm'].image.value !== "" && document.forms['modaleForm'].category.value !== "") {
             modaleFormValidate.style.backgroundColor = "#1D6154";
             return true;
         }
@@ -571,4 +571,27 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         modaleDelete.style.display = "block";
         modaleForm.style.display = "none";
     }
+
+    const formData = new FormData(modaleForm, modaleFormValidate);
+    for (const [key, value] of formData) {
+        console.log(key, value);
+    }
+
+    // Fetch post works depuis la modale
+    function postWork() {
+        fetch(`${apiUrl}/works/`, {
+            method: "POST",
+            headers: {
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                },
+            body: formData
+            })
+            .then(response => response.json())
+            .then((response) => {
+
+            })
+            .catch((error) => {
+                console.error(error)
+            });
+    };
 };
