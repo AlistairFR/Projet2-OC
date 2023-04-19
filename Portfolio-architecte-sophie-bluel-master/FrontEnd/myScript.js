@@ -175,7 +175,6 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         const editionIconBar = document.createElement("div");
         const editionDivIcon = document.createElement("i");
 
-        editionDivButton.setAttribute("onclick", "publishChanges()")
         editionDivButton.textContent = "publier les changements"
         editionText.textContent = "Mode édition";
         editionDivIcon.setAttribute("class", "fa-regular fa-pen-to-square");
@@ -190,7 +189,6 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         // Style du bandereau
         editionDiv.style.width = "100vw";
         editionDiv.style.marginLeft = "calc(-1 * ((100vw - 100%) / 2))";
-
         editionDiv.style.display = "flex"
         editionDiv.style.justifyContent = "center";
         editionDiv.style.alignItems = "center";
@@ -439,6 +437,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormImage.setAttribute("name", "photo");
     modaleFormImage.setAttribute("id", "photo");
     modaleFormImage.setAttribute("accept", "image/png, image/jpeg");
+    modaleFormImage.setAttribute("required", "");
     // Label titre
     const modaleFormTitleLabel = document.createElement("label");
     modaleFormTitleLabel.setAttribute("for", "titre");
@@ -448,6 +447,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormTitle.setAttribute("type", "text");
     modaleFormTitle.setAttribute("name", "titre");
     modaleFormTitle.setAttribute("id", "titre");
+    modaleFormTitle.setAttribute("required", "");
     // Label categories
     const modaleFormCategoriesLabel = document.createElement("label");
     modaleFormCategoriesLabel.setAttribute("for", "categories");
@@ -456,6 +456,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     const modaleFormCategories = document.createElement("select");
     modaleFormCategories.setAttribute("id", "categories");
     modaleFormCategories.setAttribute("name", "categories");
+    modaleFormCategories.setAttribute("required", "");
     // Div vide pour la border
     const modaleFormBorder = document.createElement("div");
     // Option vide comme placeholder
