@@ -436,6 +436,10 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     const modaleFormImageIcon = document.createElement("i");
     modaleFormImageIcon.setAttribute("class", "fa-regular fa-image");
     modaleFormImageIcon.setAttribute("style", "color: #b9c5cc;");
+    // Label pour le bouton file Input
+    const modaleFormImageLabel = document.createElement("label");
+    modaleFormImageLabel.setAttribute("for", "image");
+    modaleFormImageLabel.textContent = "+ Ajouter photo";
     // Input file photo
     const modaleFormImage = document.createElement("input");
     modaleFormImage.setAttribute("type", "file");
@@ -444,6 +448,9 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormImage.setAttribute("accept", "image/png, image/jpeg");
     modaleFormImage.setAttribute("required", "");
     modaleFormImage.setAttribute("onchange", "previewImage()");
+    // Indicateur taille max
+    const modaleFormSizeText = document.createElement("p");
+    modaleFormSizeText.textContent = "jpg, png : 4mo max";
     // Image input preview
     const modaleFormImagePreview = document.createElement("img");
     modaleFormImagePreview.setAttribute("src", "");
@@ -503,7 +510,9 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
 
     // Append du Formulaire
     modaleFormImageDiv.appendChild(modaleFormImageIcon);
-    modaleFormImageDiv.appendChild(modaleFormImage);
+    modaleFormImageLabel.appendChild(modaleFormImage);
+    modaleFormImageDiv.appendChild(modaleFormImageLabel);
+    modaleFormImageDiv.appendChild(modaleFormSizeText);
     modaleFormBlueDiv.appendChild(modaleFormImageDiv);
     modaleFormBlueDiv.appendChild(modaleFormImagePreview);
     modaleForm.appendChild(modaleFormBlueDiv);
@@ -535,6 +544,17 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormImageIcon.style.fontSize = "5em";
     modaleFormImageIcon.style.paddingBottom = "20px";
 
+    modaleFormImage.style.display = "none";
+
+    modaleFormImageLabel.style.cursor = "pointer";
+    modaleFormImageLabel.style.fontWeight = "600";
+    modaleFormImageLabel.style.color = "#306685";
+    modaleFormImageLabel.style.backgroundColor = "#CBD6DC";
+    modaleFormImageLabel.style.padding = "10px 30px";
+    modaleFormImageLabel.style.marginBottom ="7px";
+    modaleFormImageLabel.style.borderRadius = "50px";
+    modaleFormImageLabel.style.border = "none";
+
     modaleFormImagePreview.style.maxHeight = "166px";
 
     modaleFormTitleLabel.style.width = "100%";
@@ -563,7 +583,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormValidate.style.fontWeight = "700";
     modaleFormValidate.style.color = "white";
     modaleFormValidate.style.backgroundColor = "#A7A7A7";
-    modaleFormValidate.style.width = "45%"
+    modaleFormValidate.style.width = "45%";
     modaleFormValidate.style.padding = "10px 50px";
     modaleFormValidate.style.margin ="30px 0px 20px 0px";
     modaleFormValidate.style.borderRadius = "25px";
