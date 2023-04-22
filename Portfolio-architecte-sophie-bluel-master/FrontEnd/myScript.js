@@ -422,12 +422,16 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
 
     // Création du formulaire de la modale
     const modaleForm = document.createElement("form");
-    modaleForm.setAttribute("action", `${apiUrl}/works`);
-    modaleForm.setAttribute("method", "post");
-    modaleForm.setAttribute("enctype", "multipart/form-data");
+    //modaleForm.setAttribute("action", `${apiUrl}/works`);
+    modaleForm.setAttribute("action", "#");
+    //modaleForm.setAttribute("method", "post");
+    //modaleForm.setAttribute("enctype", "multipart/form-data");
     modaleForm.setAttribute("name", "modaleForm");
+    modaleForm.setAttribute("id", "modaleForm");
     // Div bleue pour le file input
     const modaleFormBlueDiv = document.createElement("div");
+    // Div pour le file input à remplacer par la preview de l'image
+    const modaleFormImageDiv = document.createElement("div");
     // Icone image
     const modaleFormImageIcon = document.createElement("i");
     modaleFormImageIcon.setAttribute("class", "fa-regular fa-image");
@@ -439,6 +443,10 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleFormImage.setAttribute("id", "image");
     modaleFormImage.setAttribute("accept", "image/png, image/jpeg");
     modaleFormImage.setAttribute("required", "");
+    modaleFormImage.setAttribute("onchange", "previewImage()");
+    // Image input preview
+    const modaleFormImagePreview = document.createElement("img");
+    modaleFormImagePreview.setAttribute("src", "");
     // Label titre
     const modaleFormTitleLabel = document.createElement("label");
     modaleFormTitleLabel.setAttribute("for", "title");
@@ -487,14 +495,17 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         });
     // Création du bouton Valider
     const modaleFormValidate = document.createElement("input");
-    modaleFormValidate.setAttribute("type", "submit");
+    modaleFormValidate.setAttribute("type", "button");
     modaleFormValidate.setAttribute("id", "validate");
     modaleFormValidate.setAttribute("value", "Valider");
-    modaleFormValidate.setAttribute("onclick", "IsFull()");
+    modaleFormValidate.setAttribute("onclick", "postWork()")
+    modaleFormValidate.setAttribute("disabled", "");
 
     // Append du Formulaire
-    modaleFormBlueDiv.appendChild(modaleFormImageIcon);
-    modaleFormBlueDiv.appendChild(modaleFormImage);
+    modaleFormImageDiv.appendChild(modaleFormImageIcon);
+    modaleFormImageDiv.appendChild(modaleFormImage);
+    modaleFormBlueDiv.appendChild(modaleFormImageDiv);
+    modaleFormBlueDiv.appendChild(modaleFormImagePreview);
     modaleForm.appendChild(modaleFormBlueDiv);
     modaleForm.appendChild(modaleFormTitleLabel);
     modaleForm.appendChild(modaleFormTitle);
@@ -507,50 +518,90 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     // Style du Formulaire
     modaleForm.style.display = "none";
     modaleForm.style.flexDirection = "column";
+    modaleForm.style.alignItems = "center";
+
+    modaleFormImageDiv.style.display = "flex";
+    modaleFormImageDiv.style.flexDirection = "column";
+    modaleFormImageDiv.style.alignItems = "center";
 
     modaleFormBlueDiv.style.display = "flex";
     modaleFormBlueDiv.style.flexDirection = "column";
     modaleFormBlueDiv.style.alignItems = "center";
-    modaleFormBlueDiv.style.padding = "30px 120px 25px 120px";
+    modaleFormBlueDiv.style.width = "50%";
+    modaleFormBlueDiv.style.maxHeight = "166px";
     modaleFormBlueDiv.style.marginBottom = "30px";
     modaleFormBlueDiv.style.backgroundColor = "#E8F1F7";
 
     modaleFormImageIcon.style.fontSize = "5em";
     modaleFormImageIcon.style.paddingBottom = "20px";
 
+    modaleFormImagePreview.style.maxHeight = "166px";
+
+    modaleFormTitleLabel.style.width = "100%";
+
     modaleFormTitle.style.height = "40px";
+    modaleFormTitle.style.width = "97%";
     modaleFormTitle.style.margin = "10px 0px 20px 0px";
     modaleFormTitle.style.paddingLeft = "15px";
     modaleFormTitle.style.border = "none";
     modaleFormTitle.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
 
+    modaleFormCategoriesLabel.style.width = "100%";
+
     modaleFormCategories.style.height = "45px";
+    modaleFormCategories.style.width = "100%";
     modaleFormCategories.style.margin = "10px 0px 50px 0px";
     modaleFormCategories.style.paddingLeft = "15px";
     modaleFormCategories.style.border = "none";
     modaleFormCategories.style.boxShadow = "rgba(0, 0, 0, 0.1) 0px 4px 12px";
     modaleFormCategories.style.cursor = "pointer";
 
-    modaleFormBorder.style.borderTop = "1px solid #B3B3B3"
+    modaleFormBorder.style.borderTop = "1px solid #B3B3B3";
+    modaleFormBorder.style.width = "100%";
 
     modaleFormValidate.style.fontFamily = "Syne";
     modaleFormValidate.style.fontWeight = "700";
     modaleFormValidate.style.color = "white";
     modaleFormValidate.style.backgroundColor = "#A7A7A7";
+    modaleFormValidate.style.width = "45%"
     modaleFormValidate.style.padding = "10px 50px";
-    modaleFormValidate.style.marginTop ="30px";
-    modaleFormValidate.style.cursor = "pointer";
+    modaleFormValidate.style.margin ="30px 0px 20px 0px";
     modaleFormValidate.style.borderRadius = "25px";
     modaleFormValidate.style.border = "none";
+
+    // Fonction pour preview l'image du formulaire
+    function previewImage() {
+        const image = modaleFormImage.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+            // Convertion de l'image en string (base64)
+            modaleFormImagePreview.src = reader.result;
+        }, false);
+
+        if (image) {
+            modaleFormBlueDiv.style.padding = "0px 120px 0px 120px";
+            modaleFormImageDiv.style.display = "none";
+            reader.readAsDataURL(image);
+        }
+    }
 
     // Check if (form rempli) then (boutton validate disabled=false)
     function IsFull() {
         if (document.forms['modaleForm'].title.value !== "" && document.forms['modaleForm'].image.value !== "" && document.forms['modaleForm'].category.value !== "") {
             modaleFormValidate.style.backgroundColor = "#1D6154";
+            modaleFormValidate.removeAttribute("disabled");
+            modaleFormValidate.style.cursor = "pointer";
+            console.log(getFormData("#modaleForm"));
             return true;
         }
         return false;
     };
+
+    // Event listener à l'input pour check isFull()
+    modaleFormImage.addEventListener("input", IsFull);
+    modaleFormTitle.addEventListener("input", IsFull);
+    modaleFormCategories.addEventListener("input", IsFull);
 
     // openForm()
     function openForm() {
@@ -560,6 +611,8 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         modaleAdd.style.display = "none";
         modaleDelete.style.display = "none";
         modaleForm.style.display = "flex";
+        modaleFormImageDiv.style.display = "flex";
+        modaleFormBlueDiv.style.padding = "30px 120px 25px 120px";
 
     }
     // closeForm()
@@ -570,25 +623,28 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         modaleAdd.style.display = "block";
         modaleDelete.style.display = "block";
         modaleForm.style.display = "none";
+        modaleFormImage.value = "";
+        modaleFormTitle.value = "";
+        modaleFormCategories.value = "";
+        modaleFormImagePreview.src = "";
     }
 
-    const formData = new FormData(modaleForm, modaleFormValidate);
-    for (const [key, value] of formData) {
-        console.log(key, value);
-    }
+    // Fonction pour récupérer les inputs et les convertir en FormData
+    getFormData = (selector) => Object.fromEntries(new FormData(document.querySelector(selector)))
 
     // Fetch post works depuis la modale
     function postWork() {
+        formData = getFormData("#modaleForm");
+        console.log(formData);
         fetch(`${apiUrl}/works/`, {
             method: "POST",
             headers: {
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             body: formData
             })
-            .then(response => response.json())
             .then((response) => {
-
+                console.log(response);
             })
             .catch((error) => {
                 console.error(error)
