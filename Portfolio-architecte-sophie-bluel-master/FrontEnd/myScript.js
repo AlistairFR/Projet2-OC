@@ -659,12 +659,19 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
 
     // Fetch post works depuis la modale
     function postWork() {
+        // Récupération du l'image dans le input file
+        modaleFormImage.addEventListener("change", function () {
+            image = this.files[0]
+        });
         let formData = new FormData();
-        let image = convertImage();
         formData.append("image", image);
         formData.append("title", modaleFormTitle.value);
         formData.append("category", modaleFormCategories.value);
-        console.log(formData);
+
+        // Vérification du contenu du formData
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ", " + pair[1]);
+        };
 
         fetch(`${apiUrl}/works/`, {
             method: "POST",
