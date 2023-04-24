@@ -648,34 +648,31 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         modaleFormImagePreview.src = "";
     }
 
-    // Fonction pour récupérer l'image et la convertir en string (base64)
-    let imageUrl
-    function convertImage() {
-        const image = modaleFormImage.files[0];
-        const reader = new FileReader();
-        console.log(reader.readAsDataURL(image));
-
-    }
+    // Fonction pour récupérer l'image du formulaire
+    let imageForm
+    function getImage(e) {
+        const image = e.files[0];
+        return image;
+    };
 
     // Fetch post works depuis la modale
     function postWork() {
-        // Récupération du l'image dans le input file
-        modaleFormImage.addEventListener("change", function () {
-            image = this.files[0]
-        });
+        // Assignation du fichier image
+        imageForm = getImage(modaleFormImage);
+        // Assignation du titre
+        let title = modaleFormTitle.value;
+        // Assignation de la catégorie
+        let category = modaleFormCategories.value;
+        // Création du FormData à envoyer
         let formData = new FormData();
-        formData.append("image", image);
-        formData.append("title", modaleFormTitle.value);
-        formData.append("category", modaleFormCategories.value);
-
-        // Vérification du contenu du formData
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ", " + pair[1]);
-        };
-
+        formData.append("title", title);
+        formData.append("image", imageForm);
+        formData.append("category", category);
+        // Envoi du FormData via fetch post
         fetch(`${apiUrl}/works/`, {
             method: "POST",
             headers: {
+                "Accept": "multipart/form-data",
                 Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             body: formData
