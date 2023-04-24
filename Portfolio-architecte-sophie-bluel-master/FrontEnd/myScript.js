@@ -528,6 +528,7 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
     modaleForm.style.display = "none";
     modaleForm.style.flexDirection = "column";
     modaleForm.style.alignItems = "center";
+    modaleForm.style.width = "75%";
 
     modaleFormImageDiv.style.display = "flex";
     modaleFormImageDiv.style.flexDirection = "column";
@@ -595,7 +596,6 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         const reader = new FileReader();
 
         reader.addEventListener("load", () => {
-            // Convertion de l'image en string (base64)
             modaleFormImagePreview.src = reader.result;
         }, false);
 
@@ -612,7 +612,6 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
             modaleFormValidate.style.backgroundColor = "#1D6154";
             modaleFormValidate.removeAttribute("disabled");
             modaleFormValidate.style.cursor = "pointer";
-            console.log(getFormData("#modaleForm"));
             return true;
         }
         return false;
@@ -649,13 +648,24 @@ if (getElement("authToken") !== "undefined" && typeof getElement("authToken") ==
         modaleFormImagePreview.src = "";
     }
 
-    // Fonction pour récupérer les inputs et les convertir en FormData
-    getFormData = (selector) => Object.fromEntries(new FormData(document.querySelector(selector)))
+    // Fonction pour récupérer l'image et la convertir en string (base64)
+    let imageUrl
+    function convertImage() {
+        const image = modaleFormImage.files[0];
+        const reader = new FileReader();
+        console.log(reader.readAsDataURL(image));
+
+    }
 
     // Fetch post works depuis la modale
     function postWork() {
-        formData = getFormData("#modaleForm");
+        let formData = new FormData();
+        let image = convertImage();
+        formData.append("image", image);
+        formData.append("title", modaleFormTitle.value);
+        formData.append("category", modaleFormCategories.value);
         console.log(formData);
+
         fetch(`${apiUrl}/works/`, {
             method: "POST",
             headers: {
